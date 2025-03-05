@@ -6,17 +6,21 @@ import { products } from "./data/products";
 
 export default function Home() {
   return (
-    <main className="max-w-7xl mx-auto px-4">
-    {/* Seção de promoção */}
-    <div className="flex flex-col gap-[32px] py-[40px]">
+    <>
+      {/* Banner em full width, fora do container */}
       <Banner />
-      <ProductList products={products} />
-    </div>
 
-    { /* Seção de produtos */ }
-    <div>
-      <GpusList gpus={gpus} />
-    </div>
-  </main>
+      {/* Conteúdo centralizado */}
+      <main className="max-w-7xl mx-auto px-4">
+        <div className="flex flex-col gap-[32px] py-[40px]">
+          <ProductList products={products} />
+        </div>
+
+        {/* Seção de produtos */}
+        <div>
+          <GpusList gpus={gpus} />
+        </div>
+      </main>
+    </>
   );
 }

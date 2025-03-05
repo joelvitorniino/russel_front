@@ -9,7 +9,7 @@ interface GpusListProps {
 
 export default function GpusList({ gpus }: GpusListProps) {
   return (
-    <section className="w-full bg-white px-10 py-10">
+    <section className="w-full bg-white px-4 py-10">
       {/* Cabeçalho: Título e Label */}
       <div className="flex flex-row items-center gap-2">
         <h2
@@ -43,8 +43,14 @@ export default function GpusList({ gpus }: GpusListProps) {
 
       {/* Container principal */}
       <div className="max-w-[1320px] mx-auto mt-6">
-        {/* Grid com 5 colunas e gap de 40px */}
-        <div className="grid grid-cols-5 gap-[40px]">
+        {/* 
+          Tornar o grid responsivo:
+          - grid-cols-1 => 1 coluna em telas muito pequenas
+          - sm:grid-cols-2 => 2 colunas ≥ 640px
+          - md:grid-cols-3 => 3 colunas ≥ 768px
+          - lg:grid-cols-5 => 5 colunas ≥ 1024px
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {gpus.map((gpu) => (
             <div
               key={gpu.id}
@@ -53,7 +59,7 @@ export default function GpusList({ gpus }: GpusListProps) {
                 flex-col
                 items-center
                 p-4
-                gap-[25px]
+                gap-4
                 bg-[#FAFAFA]
                 rounded
               "
@@ -63,7 +69,7 @@ export default function GpusList({ gpus }: GpusListProps) {
                 src={gpu.image}
                 alt={gpu.name}
                 className="
-                  w-[200px]
+                  w-full
                   h-[200px]
                   rounded
                   object-cover
@@ -79,6 +85,7 @@ export default function GpusList({ gpus }: GpusListProps) {
                   tracking-[-0.02em]
                   text-[#1A1A1A]
                   font-[DM_Sans]
+                  text-center
                 "
               >
                 {gpu.name}
@@ -131,7 +138,7 @@ export default function GpusList({ gpus }: GpusListProps) {
               {/* Botão "COMPRAR" */}
               <button
                 className="
-                  w-[200px]
+                  w-full
                   h-[35px]
                   bg-[#5438FF]
                   text-white
