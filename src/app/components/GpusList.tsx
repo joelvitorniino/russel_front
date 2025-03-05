@@ -1,8 +1,9 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Gpus } from '../interface/ProductInterface';
 import Image from 'next/image';
+import ProductPopup from './ProductPopup';
 
 interface GpusListProps {
   gpus: Gpus[];
@@ -14,52 +15,74 @@ interface GpuCardProps {
 
 // Componente para renderizar cada card
 function GpuCard({ gpu }: GpuCardProps) {
-  return (
-    <div className="bg-[#FAFAFA] rounded flex flex-col h-full">
-      {/* Conteúdo principal */}
-      <div className="p-4 flex-grow flex flex-col items-center gap-4">
-        <Image
-          src={gpu.image}
-          alt={gpu.name}
-          width={200}
-          height={200}
-          className="rounded object-cover"
-        />
+    const [showPopup, setShowPopup] = useState(false);
+    
+      const handleOpenPopup = () => {
+        setShowPopup(true);
+      };
+    
+      const handleClosePopup = () => {
+        setShowPopup(false);
+      };
+    
 
-        <h3 className="font-bold text-[16px] leading-[120%] tracking-[-0.02em] text-[#1A1A1A] font-[DM_Sans] text-center">
-          {gpu.name}
-        </h3>
+    return (
+      <div className="bg-white rounded flex flex-col h-full">
+        {/* Conteúdo principal */}
+        <div className="flex-grow flex flex-col items-center">
+          {/* Container da imagem responsiva */}
+          <div className="relative w-full h-[120px] md:h-[200px]">
+            <Image
+              src={gpu.image}
+              alt={gpu.name}
+              fill
+              className="object-contain"
+            />
+          </div>
+  
+          <h3 className="font-bold text-sm md:text-[16px] leading-[120%] tracking-[-0.02em] text-[#1A1A1A] text-left w-full mt-2">
+            {gpu.name}
+          </h3>
+  
+          <div className="flex flex-col items-start w-full mt-1 md:mt-2">
+            <span className="text-xs md:text-[14px] text-gray-500 line-through">
+              R$ {gpu.oldPrice}
+            </span>
+            
+            <strong className="text-[16px] md:text-[18px] text-[#1A1A1A] font-bold">
+              R$ {gpu.price}
+            </strong>
+  
+            <span className="text-xs md:text-[14px] text-[#5438FF]">
+              com 20% de desconto no PIX
+            </span>
+          </div>
+        </div>
+  
+        {/* Botão - Ajustado para corresponder ao tamanho da imagem */}
+        <div className="mt-3 md:mt-4">
+          <button className="w-full py-2 bg-[#5438FF] text-white font-bold text-sm rounded hover:bg-[#4529e6] transition-colors" onClick={handleOpenPopup}>
+            COMPRAR
+          </button>
 
-        <div className="flex flex-col items-center">
-          <span className="text-center text-[14px] leading-[120%] tracking-[-0.02em] text-[#1A1A1A] font-[DM_Sans] line-through">
-            R$ {gpu.oldPrice}
-          </span>
-
-          <strong className="text-center text-[18px] leading-[120%] tracking-[-0.02em] text-[#1A1A1A] font-bold font-[DM_Sans]">
-            R$ {gpu.price}
-          </strong>
-
-          <span className="text-center text-[14px] leading-[120%] tracking-[-0.02em] text-[#5438FF] font-[DM_Sans]">
-            com 20% de desconto no PIX
-          </span>
+          {/* Popup (apenas se showPopup for true) */}
+                {showPopup && (
+                  <ProductPopup
+                    product={gpu}
+                    onClose={handleClosePopup}
+                    isGpu={true}
+                  />
+                )}
         </div>
       </div>
-
-      {/* Botão */}
-      <div className="p-4">
-        <button className="w-full h-[35px] bg-[#5438FF] text-white font-bold text-[16px] leading-[120%] font-[DM_Sans] rounded">
-          COMPRAR
-        </button>
-      </div>
-    </div>
-  );
-}
+    );
+  }
 
 export default function GpusList({ gpus }: GpusListProps) {
   return (
-    <section className="w-full bg-white px-4 py-10">
+    <section className="w-full bg-white px-4 py-6">
       {/* Cabeçalho: Título e Label */}
-      <div className="flex flex-row items-center gap-2">
+      <div className="flex flex-row items-center gap-2 mb-4">
         <h2
           className="
             text-[24px]
@@ -70,7 +93,7 @@ export default function GpusList({ gpus }: GpusListProps) {
             font-[DM_Sans]
           "
         >
-          Placas de Vídeo
+          Placas de vídeo
         </h2>
 
         <div className="bg-[rgba(84,56,255,0.3)] px-2 py-1 rounded">
@@ -89,17 +112,15 @@ export default function GpusList({ gpus }: GpusListProps) {
         </div>
       </div>
 
-      {/* MOBILE (carrossel) - só aparece em telas < 640px */}
-      <div className="max-w-[1320px] mx-auto mt-6 sm:hidden overflow-x-auto">
-        {/* 
-          flex-nowrap => impede que os itens quebrem linha
-          gap-4 => espaço entre itens
-          w-1/2 => cada card ocupa metade da largura visível
-          flex-shrink-0 => evita que os cards encolham
-        */}
-        <div className="flex flex-nowrap gap-4">
+      {/* MOBILE - dois cards visíveis com rolagem horizontal */}
+      <div className="sm:hidden overflow-x-auto -mx-4 px-4 pb-2">
+        <div className="flex gap-3" style={{ width: "max-content" }}>
           {gpus.map((gpu) => (
-            <div key={gpu.id} className="w-1/2 flex-shrink-0">
+            <div 
+              key={gpu.id} 
+              className="flex-shrink-0" 
+              style={{ width: "calc(50vw - 14px)" }}
+            >
               <GpuCard gpu={gpu} />
             </div>
           ))}
@@ -107,7 +128,7 @@ export default function GpusList({ gpus }: GpusListProps) {
       </div>
 
       {/* DESKTOP (grid) - aparece em telas >= 640px */}
-      <div className="hidden sm:block max-w-[1320px] mx-auto mt-6">
+      <div className="hidden sm:block max-w-[1320px] mx-auto">
         <div
           className="
             grid
@@ -118,7 +139,9 @@ export default function GpusList({ gpus }: GpusListProps) {
           "
         >
           {gpus.map((gpu) => (
-            <GpuCard key={gpu.id} gpu={gpu} />
+            <div key={gpu.id}>
+              <GpuCard gpu={gpu} />
+            </div>
           ))}
         </div>
       </div>

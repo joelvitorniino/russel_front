@@ -4,9 +4,10 @@ import { Product } from "../interface/ProductInterface";
 interface ProductPopupProps {
   product: Product;
   onClose: () => void;
+  isGpu?: boolean;
 }
 
-export default function ProductPopup({ product, onClose }: ProductPopupProps) {
+export default function ProductPopup({ product, onClose, isGpu }: ProductPopupProps) {
   return (
     // Overlay que cobre a tela
     <div
@@ -76,9 +77,15 @@ export default function ProductPopup({ product, onClose }: ProductPopupProps) {
 
           {/* Linha de informações (estoque etc.) */}
           <div className="flex flex-row flex-wrap items-center gap-4">
-            <span className="font-dm-sans text-base text-[#1A1A1A]">
-              Vendido e entregue por Logitech Brasil
-            </span>
+              {isGpu ? (
+                            <span className="font-dm-sans text-base text-[#1A1A1A]">
+                                Vendido e entregue por Pichau
+                            </span>
+              ) : (
+                <span className="font-dm-sans text-base text-[#1A1A1A]">
+                                Vendido e entregue por Logitech Brasil
+                            </span> 
+              )}
             {/* Esse separador pode ficar oculto no mobile, se quiser */}
             <span className="font-dm-sans text-base text-[#1A1A1A] hidden md:block">
               |
