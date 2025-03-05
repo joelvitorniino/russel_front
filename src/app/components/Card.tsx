@@ -1,11 +1,25 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Product } from "../interface/ProductInterface";
+import ProductPopup from "./ProductPopup";
 
 interface CardProps {
   product: Product;
 }
 
 export default function Card({ product }: CardProps) {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
     <div
       className="
@@ -18,6 +32,7 @@ export default function Card({ product }: CardProps) {
         bg-[#121212]
         rounded-md
         p-4
+        relative
       "
     >
       {/* Imagem do Produto */}
@@ -58,8 +73,9 @@ export default function Card({ product }: CardProps) {
         </span>
       </div>
 
-      {/* Botão de compra (fica “grudado” embaixo graças ao justify-between) */}
+      {/* Botão de compra */}
       <button
+        onClick={handleOpenPopup}
         className="
           mt-4
           bg-[#00B5EA]
@@ -75,11 +91,19 @@ export default function Card({ product }: CardProps) {
           ease-in-out
           rounded
           hover:bg-[#0095C8]
-    hover:shadow-lg
+          hover:shadow-lg
         "
       >
         Comprar
       </button>
+
+      {/* Popup (apenas se showPopup for true) */}
+      {showPopup && (
+        <ProductPopup
+          product={product}
+          onClose={handleClosePopup}
+        />
+      )}
     </div>
   );
 }
