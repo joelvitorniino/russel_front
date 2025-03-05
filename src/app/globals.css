@@ -12,6 +12,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  --background-color-logitech: #01b4ea;
+  --font-sans: var(--font-dm-sans), 'sans-serif';
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

@@ -1,4 +1,13 @@
 import "./globals.css";
+
+import { DM_Sans } from '@next/font/google'
+
+const dmSans = DM_Sans({
+  weight: ["400", "700"],
+  variable: "--font-dm-sans"
+})
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -6,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+      <body className={dmSans.className}
       >
         {children}
       </body>
