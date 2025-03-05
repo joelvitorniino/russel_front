@@ -70,7 +70,12 @@ export default function Card({ product }: CardProps) {
           py-2
           px-4
           w-full
+          transition
+          duration-500
+          ease-in-out
           rounded
+          hover:bg-[#0095C8]
+    hover:shadow-lg
         "
       >
         Comprar
