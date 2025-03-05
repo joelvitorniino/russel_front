@@ -164,8 +164,8 @@ export default function ProductPopup({ product, onClose, isGpu }: ProductPopupPr
           onClick={onClose}
           className="
             absolute
-            top-2
-            right-2
+            top-4
+            right-4
             text-black
             font-bold
             text-xl
