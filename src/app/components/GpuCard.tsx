@@ -18,7 +18,7 @@ export const GpuCard: React.FC<GpuCardProps> = ({ gpu }) => {
   const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do popup
 
   return (
-    <div className="bg-white rounded flex flex-col h-full">
+    <div className="bg-white rounded flex flex-col h-full hover:bg-whiteSmooth">
       {/* Seção principal do card */}
       <div className="flex-grow flex flex-col items-center">
         {/* Imagem da GPU */}
