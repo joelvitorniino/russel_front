@@ -3,27 +3,32 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+/**
+ * Componente de Banner Responsivo.
+ * 
+ * Exibe uma imagem de banner que se adapta ao tamanho da tela.
+ */
 export default function Banner() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Check if we're on the client side
-    if (typeof window !== "undefined") {
-      // Initial check
+    /**
+     * Atualiza o estado `isMobile` com base no tamanho da janela.
+     */
+    const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      
-      // Add resize listener
-      const handleResize = () => {
-        setIsMobile(window.innerWidth < 768);
-      };
-      
-      window.addEventListener("resize", handleResize);
-      
-      // Clean up
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }
+    };
+    
+    // Configuração inicial
+    handleResize();
+    
+    // Adiciona um listener para redimensionamento
+    window.addEventListener("resize", handleResize);
+    
+    // Remove o listener ao desmontar o componente
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -35,7 +40,7 @@ export default function Banner() {
           fill={isMobile}
           width={isMobile ? undefined : 1366}
           height={isMobile ? undefined : 366}
-          layout={isMobile ? undefined : "responsive"}
+          layout={!isMobile ? "responsive" : undefined}
           objectFit="cover"
           priority
           className="object-cover"
