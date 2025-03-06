@@ -45,7 +45,7 @@ Para rodar o projeto localmente, siga os passos abaixo:
 
 ### 1. Clonar o Repositório
 ```bash
-git clone [URL_DO_REPOSITORIO]
+git clone https://github.com/joelvitorniino/russel_front
 cd russel_front
 ```
 
