@@ -62,7 +62,7 @@ export default function Card({ product }: CardProps) {
         {/* Botão de compra */}
         <button
   onClick={() => setShowPopup(true)}
-  className="bg-[#00B5EA] text-[#1A1A1A] font-bold uppercase text-sm py-2 px-4 w-full transition duration-300 ease-in-out hover:bg-[#0095C8] hover:shadow-lg mt-4"
+  className="bg-[#00B5EA] text-[#1A1A1A] font-bold uppercase text-xl py-2 px-4 w-full transition duration-300 ease-in-out hover:bg-[#0095C8] hover:shadow-lg mt-4"
 >
   Comprar
 </button>
