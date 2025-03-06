@@ -34,9 +34,15 @@ const ProductPopup: React.FC<ProductPopupProps> = ({ product, onClose, isGpu }) 
 
           {/* Informações de venda */}
           <div className="flex flex-row flex-wrap items-center gap-4">
-            <span className="font-dm-sans text-base text-[#1A1A1A]">
-              Vendido e entregue por {isGpu ? "Pichau" : "Logitech Brasil"}
-            </span>
+          <span className="font-dm-sans text-base text-[#1A1A1A]">
+  Vendido e entregue por{" "}
+  {isGpu ? (
+    "Pichau"
+  ) : (
+    <span className="text-logitech">Logitech Brasil</span>
+  )}
+</span>
+
             <span className="font-dm-sans text-base text-[#1A1A1A] hidden md:block">|</span>
             <span className="font-dm-sans text-base font-bold text-[#5438FF]">Em estoque</span>
           </div>
