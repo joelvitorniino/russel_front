@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Product } from "../interface/ProductInterface";
 import ProductPopup from "./ProductPopup";
+import { Toaster } from "react-hot-toast";
 
 interface CardProps {
   product: Product;
@@ -11,13 +12,15 @@ interface CardProps {
 
 /**
  * Componente de Card para exibir informações do produto.
- * Inclui imagem, nome, preços e botão de compra com popup.
  */
 export default function Card({ product }: CardProps) {
   const [showPopup, setShowPopup] = useState(false);
 
   return (
     <div className="h-full w-full flex flex-col justify-between items-center bg-[#121212] rounded-md p-2 md:p-4 relative">
+      {/* Toaster para exibir notificações */}
+      <Toaster position="top-right" />
+
       {/* Imagem do Produto */}
       <div className="relative w-full h-[120px] md:h-[180px] bg-white rounded">
         <Image src={product.image} alt={product.name} fill className="object-contain rounded" />
