@@ -18,6 +18,8 @@ O objetivo principal do projeto é replicar fielmente o design fornecido no **Fi
 ## Website do Projeto
 https://russel-front.vercel.app/
 
+---
+
 ## Estrutura do Projeto
 A estrutura do projeto segue boas práticas para Next.js:
 ```
